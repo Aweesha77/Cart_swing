@@ -1,0 +1,262 @@
+    //    private void saveProductsToFile() throws IOException {
+//        File file = new File("ProductListDetails.txt");
+//        FileWriter fileWriter = new FileWriter(file);
+//        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//
+//        for (Product product : saveListAdd) {
+//            // Convert product to a string representation and write it to the file
+//            String productInfo = convertProductToString(product);
+//            bufferedWriter.write(productInfo);
+//            bufferedWriter.newLine();
+//        }
+//
+//        bufferedWriter.close();
+//    }
+//
+//    private String convertProductToString(Product product) {
+//        // Customize this method based on your Product class structure
+//        // For example, assuming Product has getProductId(), getProductName(), etc.
+//        return product.getProductId() + "," + product.getProductName() + "," + product.getNoItems() + ","
+//                + product.getPrice();
+//    }
+//
+//    private void loadProductsFromFile() throws IOException {
+//        File file = new File("ProductListDetails.txt");
+//        FileReader fileReader = new FileReader(file);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//
+//        String line;
+//        while ((line = bufferedReader.readLine()) != null) {
+//            // Convert the line (product information) back to a Product object
+//            Product product = convertStringToProduct(line);
+//            consoleProductList.add(product);
+//        }
+//
+//        bufferedReader.close();
+//    }
+//
+//    private Product convertStringToProduct(String line) {
+//        // Customize this method based on your Product class structure
+//        String[] parts = line.split(",");
+//        // For example, assuming Product has a constructor that takes parameters
+//        return new Product(parts[0], parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3]));
+//    }
+
+
+
+
+//    private void saveProductsToFile() throws IOException {
+//        File file = new File("ProductListDetails.dat");
+//        FileOutputStream fOut = new FileOutputStream(file);
+//        ObjectOutputStream objOut = new ObjectOutputStream(fOut);
+//
+//        Iterator listProduct = WestminsterShoppingManager.saveListAdd.listIterator();
+//        while (listProduct.hasNext()) {
+//            Product productNew = (Product) listProduct.next();
+//            objOut.writeObject(productNew);
+//        }
+//
+////        1
+//    }
+//
+//
+//    private void loadProductsFromFile() throws IOException {
+//        FileInputStream fIn = new FileInputStream("ProductListDetails.dat");
+//        ObjectInputStream objIn = new ObjectInputStream(fIn);
+//
+//        while (true) {
+//            try {
+//                Product product1 = (Product) objIn.readObject();
+//                WestminsterShoppingManager.consoleProductList.add(product1);
+//            } catch (IOException | ClassNotFoundException e) {
+//                break;
+//            }
+//        }
+//    }
+
+//    private void loadProductsFromFile() throws IOException {
+//        File file = new File("sampletext.txt");
+//        try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+//            String str;
+//            while ((str = reader.readLine()) != null){
+//                String[] words = str.split(" ");
+//                if(words[0].equals("Electronics")){
+//                    //System.out.println(words[5]);
+//                    Electronics product = new Electronics(words[3], words[4], Integer.parseInt(words[5]), Double.parseDouble(words[6]), words[7], Integer.parseInt(words[8]));
+//                    consoleProductList.add(product);
+//                } else if (words[0].equals("Clothing")) {
+//                    //System.out.println("hello clo");
+//                    Clothing product = new Clothing(words[2], words[3], Integer.parseInt(words[4]), Double.parseDouble(words[5]), words[6], Float.parseFloat(words[6]));
+//                    consoleProductList.add(product);
+//                }
+//            }
+//           // System.out.println("Load Successfully");
+//        } catch (IOException e) {
+//            System.out.println("Error saving products to file: " + e.getMessage());
+//        }
+////        return consoleProductList;
+//    }
+
+
+//    public void saveNewProductsToFile(int initialSize) {
+//        //mergeArrayLists(saveList,WestminsterShoppingManager.consoleProductList);
+//        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(FILE_NAME, true))) {
+//            // Write only the newly added products
+//            for (int i = initialSize; i < WestminsterShoppingManager.consoleProductList.size(); i++) {
+//                objectOutputStream.writeObject(WestminsterShoppingManager.consoleProductList.get(i));
+//            }
+//            System.out.println("New products appended to " + FILE_NAME + " successfully.");
+//        } catch (IOException e) {
+//            System.out.println("Error saving new products to file: " + e.getMessage());
+//        }
+//    }
+//
+//    public static void loadProductListFromFile() {
+//        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
+//            // Read the entire list at once
+//            //WestminsterShoppingManager.saveList = (ArrayList<Product>) objectInputStream.readObject();
+//            System.out.println("Product list loaded from " + FILE_NAME + " successfully.");
+//        } catch (IOException | ClassNotFoundException e) {
+//            System.out.println("Error loading product list from file: " + e.getMessage());
+//        }
+//    }
+
+
+
+
+//        updateVaribles();
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("sampletext.txt", false))) {
+//            for (Product product : consoleProductList) {
+//                if(product instanceof Electronics){
+//                    writer.append(electronics);
+//                    writer.newLine();
+//                }else if (product instanceof  Clothing){
+//                    writer.write(clothes);
+//                    writer.newLine();
+//                }
+//            }
+//            //System.out.println(consoleProductList);
+//            //System.out.println("Saved Successfully");
+//        } catch (IOException e) {
+//            System.out.println("Error saving products to file: " + e.getMessage());
+//        }
+
+
+//    public void updateVaribles() {
+//
+//        for(Product product : consoleProductList){
+//            if(product instanceof Electronics){
+//                electronics = "Electronics : "+ ' '+ product.getProductId()+ ' '+ product.getProductName()+ ' '+ ((Electronics) product).getNoItems()+ ' '+((Electronics) product).getPrice()+ ' '+ ((Electronics) product).getBrand()+ ' '+ ((Electronics) product).getWarrantyPeriod();
+//            } else if (product instanceof  Clothing) {
+//                clothes ="Clothing : "+ product.getProductId()+ ' '+ product.getProductName()+ ' '+ ((Clothing) product).getNoItems()+ ' '+ ((Clothing) product).getPrice()+ ' '+ ((Clothing) product).getClothSize()+ ' '+ ((Clothing) product).getClothColor();
+//            }
+//        }
+//    }
+
+
+
+//
+//    public void uploadUser() throws IOException {
+//
+
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(USER_DETAILS_FILE, true))) {
+//            // Append new user details to the file
+//            for (User user: userList) {
+//                writer.write(user.getUserName() + ", " + user.getUserPassword());
+//                writer.newLine();
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        File file = new File("ProductListDetails.txt");
+//        FileOutputStream fOut = new FileOutputStream(file);
+//        ObjectOutputStream objOut = new ObjectOutputStream(fOut);
+//
+//        Iterator userListIterator = WestminsterShoppingManager.userList.listIterator();
+//        while (userListIterator.hasNext()) {
+//            User user = (User) userListIterator.next();
+//            objOut.writeObject(user);
+//        }
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(USER_DETAILS_FILE, true))) {
+//
+//
+//            // Append new user details to the file
+//            for (Product product: consoleProductList) {
+//                writer.write(product.getProductId() + ", " + product.getProductName());
+//                writer.newLine();
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+    // }
+
+
+    //        try (BufferedReader reader = new BufferedReader(new FileReader(USER_DETAILS_FILE))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                String[] parts = line.split(",");
+//                String userId = parts[0].trim();
+//                String password = parts[1].trim();
+//                WestminsterShoppingManager.userList.add(new User(userId, password));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            if (e.getSource() == comboBox) {
+//                selectItem=comboBox.getSelectedIndex();
+//                System.out.println(selectItem);
+//
+//                area.setText(" ");
+//                if (selectItem==0){
+//                    TableModel allModel = new tableModel(WestminsterShoppingManager.consoleProductList);
+//                    table.setModel(allModel);
+//                }
+//
+//                if (selectItem==1){
+//                    area.setText("");
+//                    ArrayList<Product> electronicsArrayList=new ArrayList<>();
+//                    for (Product product:WestminsterShoppingManager.consoleProductList){
+//                        if(product instanceof Electronics){
+//                            electronicsArrayList.add(product);
+//                            WestminsterShoppingManager.electronicsHoldArrayList.add(product);
+//                        }
+//                    }
+//                    TableModel allModel = new tableModel(electronicsArrayList);
+//                    table.setModel(allModel);
+//                }
+//
+//                if (selectItem==2){
+//                    area.setText("");
+//                    ArrayList<Product> clothingArrayList=new ArrayList<>();
+//                    for (Product product:WestminsterShoppingManager.consoleProductList){
+//                        if(product instanceof Clothing){
+//                            clothingArrayList.add(product);
+//                            WestminsterShoppingManager.clothingHoldArrayList.add(product);
+//                        }
+//                    }
+//                    TableModel allModel = new tableModel(WestminsterShoppingManager.clothingHoldArrayList);
+//                    table.setModel(allModel);
+//                }
+//            }
