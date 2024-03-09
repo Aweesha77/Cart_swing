@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class LoginGui extends JFrame {
+public class UserGui extends JFrame {
 
     public static ArrayList<User> userDetails = new ArrayList<>();
     JPanel loginPanel;
@@ -14,7 +14,7 @@ public class LoginGui extends JFrame {
     JTextField usernameField;
     JButton loginButton;
 
-    LoginGui(){
+    UserGui(){
         loginPanel = new JPanel();
         this.add(loginPanel);
         loginPanel.setBackground(Color.WHITE);
