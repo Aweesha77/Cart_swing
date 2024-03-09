@@ -260,3 +260,50 @@
 //                    table.setModel(allModel);
 //                }
 //            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                if (cartObject != null) {
+//                    // Product is already in the cart, increment its quantity
+//                    cartObject.noOfProduct(selectedProduct);
+//                } else {
+//                    // Product is not in the cart, add it as a new item
+//                    cartObject = new ShoppingCart();
+//
+//                }
+//                cartObject.addProduct(selectedProduct);
+
+
+//                if (selectedRow >= 0) {    //not necessary
+//                    Product selectedProduct = WestminsterShoppingManager.consoleProductList.get(selectedRow);
+//
+//                    ShoppingCart cartObject = new ShoppingCart();
+//                    cartObject.addProduct(selectedProduct);
+
+//                    if (selectedRow >= 0) {    //not necessary
+//                        Product selectedProduct = WestminsterShoppingManager.consoleProductList.get(selectedRow);
+//                        ShoppingCart cartObject = new ShoppingCart();
+//
+//
+//                        for (int i=0;i<ShoppingCart.shoppingCartArray.size();i++){
+//                            if (selectedProduct.equals(ShoppingCart.shoppingCartArray.get(i))){
+//
+//                            }
+//                        }
+//                        //cartObject.productCount++;           increment part
+//                        //System.out.println(productCount);
+//                    }
+
+
+                //cartObject.productCount++;           increment part
+                //System.out.println(productCount);

@@ -5,7 +5,7 @@ public class Clothing extends Product implements Serializable {
     private int clothSize;
 
     public Clothing(String productId, String productName, int noItems, double price, String clothColor, int clothSize) {
-        super(productId,productName,noItems,price);
+        super(productId,productName,noItems,price);     //constructor
         this.clothColor = clothColor;
         this.clothSize = clothSize;
     }
@@ -18,11 +18,11 @@ public class Clothing extends Product implements Serializable {
         this.clothColor = clothColor;
     }
 
-    public float getClothSize() {
+    public int getClothSize() {
         return clothSize;
     }
 
-    public void setClothSize(float clothSize) {
+    public void setClothSize(int clothSize) {
         this.clothSize = (int) clothSize;
     }
 
@@ -34,13 +34,12 @@ public class Clothing extends Product implements Serializable {
 
     @Override
     public String displayProductInfo() {
-        return "Category: Clothing"+ "\n" +
+        return "Category: Clothing"+ "\n" +           //return as strings
                 "Product ID: " + getProductId() + "\n" +
                 "Name: " + getProductName() + "\n" +
                 "Price: " + getPrice()+"\n"+
                 "Color: " + clothColor+"\n"+
                 "No of Items: " + getNoItems()
-
                 ;
 
     }
