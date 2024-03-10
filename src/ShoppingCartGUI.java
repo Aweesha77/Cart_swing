@@ -93,4 +93,117 @@ public class ShoppingCartGUI extends JFrame {
         ShoppingCart cart = new ShoppingCart(WestminsterGUI.selectedProduct);
         double productTotal = cart.calculateTotal();    //access for calculateTotal method
         JLabel total = new JLabel("" + productTotal);
-        
+        total.setForeground(new Color(255, 255, 255));
+
+        double firstDiscount = cart.firstPurchaseDiscount();  //access for first purchase method
+        JLabel discount10 = new JLabel("" + firstDiscount);
+        discount10.setForeground(new Color(255, 255, 255));
+
+        double categoryDiscount = cart.discountCategory();       //access for 20 percent method
+        JLabel discount20 = new JLabel("" + categoryDiscount);
+        discount20.setForeground(new Color(255, 255, 255));
+
+        double cartFinalTotal = cart.calculateFinalTotal();     //access for final total method
+        JLabel finalTotal = new JLabel("" + cartFinalTotal);
+        finalTotal.setForeground(new Color(255, 255, 255));
+
+        extraPanel9 = new JPanel();
+        extraPanel4.add(extraPanel9,0);
+        extraPanel9.setBackground(new Color(115, 92, 156));
+        extraPanel9.add(total);
+
+        extraPanel9.setLayout(new FlowLayout());
+        extraPanel9.setFont(myFont);
+
+        extraPanel10 = new JPanel();
+        extraPanel4.add(extraPanel10,1);
+        extraPanel10.setBackground(new Color(115, 92, 156));
+        extraPanel10.add(discount10);
+
+        extraPanel11 = new JPanel();
+        extraPanel4.add(extraPanel11,2);
+        extraPanel11.setBackground(new Color(115, 92, 156));
+        extraPanel11.add(discount20);
+
+        extraPanel12 = new JPanel();
+        extraPanel4.add(extraPanel12,3);
+        extraPanel12.setBackground(new Color(115, 92, 156));
+        extraPanel12.add(finalTotal);
+
+        extraPanel5 = new JPanel();
+        extraPanel3.add(extraPanel5,0);
+        extraPanel5.setBackground(new Color(115, 92, 156));
+        extraPanel5.add(totalLabel);
+
+        extraPanel6 = new JPanel();
+        extraPanel3.add(extraPanel6,1);
+        extraPanel6.setBackground(new Color(115, 92, 156));
+        extraPanel6.add(discount10Label);
+
+        extraPanel7 = new JPanel();
+        extraPanel3.add(extraPanel7,2);
+        extraPanel7.setBackground(new Color(115, 92, 156));
+        extraPanel7.add(discount20Label);
+
+        extraPanel8 = new JPanel();
+        extraPanel3.add(extraPanel8,3);
+        extraPanel8.setBackground(new Color(115, 92, 156));
+        extraPanel8.add(finalTotalLabel);
+
+        TableModel1 model1 = new TableModel1(ShoppingCart.shoppingCartArray);
+        table1 = new JTable(model1);
+        pane = new JScrollPane(table1);
+        centerPanel.add(pane);
+        pane.setPreferredSize(new Dimension(500, 210));
+
+        BackToShoppingButton.addActionListener(new EventListenerClass());   //adding action and those action should work when button clicked
+        PlaceOrderButton.addActionListener(new EventListenerClass());
+
+    }
+
+
+    private class EventListenerClass implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == BackToShoppingButton) {       //when bach to shopping button clicked the westminster gui created
+                WestminsterGUI frame = new WestminsterGUI();
+                frame.setTitle("Westminster Shopping Centre");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   //application will exit
+                frame.setVisible(true);
+                frame.setSize(750, 500); // resize this
+                frame.setLocationRelativeTo(null);
+                dispose();
+            }
+
+            if (e.getSource() == PlaceOrderButton) {
+                if (ShoppingCart.shoppingCartArray.size() > 0) {
+                    if (LoginGUI.enteredUsername!=null){
+                        for (User user : WestminsterShoppingManager.userList) { //if user history=0, make it 1
+                            if (LoginGUI.enteredUsername.equals(user.getUserName()) && user.getHistory() == 0) {
+                                user.setHistory(1);
+                            }
+                        }
+                    }
+
+                    try {
+                        WestminsterShoppingManager.saveProductsToFile();  //save updates no of items in to the file
+                        WestminsterShoppingManager.saveUser();         //save user details specially the history
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    JOptionPane.showMessageDialog(null, "Order successfully!");
+                    ShoppingCart.shoppingCartArray = new ArrayList<>();
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Cart is empty!");  //if cart doesn't have products and try to place an order this message will pop up
+                }
+            }
+
+        }
+    }
+}
+
+
+//JOptionPane.showMessageDialog(null, "Order successfully!");
+
