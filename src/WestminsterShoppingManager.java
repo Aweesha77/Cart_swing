@@ -79,3 +79,202 @@ public class WestminsterShoppingManager implements ShoppingManager {
             }
         }
     }
+
+    public void addProductToSystem() {
+        while (true) {
+            if (WestminsterShoppingManager.consoleProductList.size()<MAX_PRODUCTS){   //check whether the product list is below than 50
+                try {
+
+                    System.out.println("Choose product type:");
+                    System.out.println("    1-Electronics");
+                    System.out.println("    2-Clothing");
+                    System.out.print("Enter your option: ");
+                    int option = input.nextInt();
+                    System.out.println("\n");
+
+                    if (option == 1) {
+                        addElectronicProduct();         //select the category
+                    } else if (option == 2) {
+                        addClothingProduct();
+                    } else {
+                        System.out.println("Something went wrong\n");     //if user input another number this will print
+                    }
+
+                    System.out.print("Do you want to add another Item (Yes/No): ");
+                    String answer = input.next();
+                    System.out.println();
+
+                    if (answer.equalsIgnoreCase("No")) {
+                        break;
+                    } else if (answer.equalsIgnoreCase("Yes")) {
+                        continue;
+                    } else {
+                        System.out.println("Entered input is invalid\nDirecting to the MAIN MENU\n");
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Enter a valid input(like numbers)\n");  //user input another type input this message will print
+                    String junk = input.nextLine();
+                }
+            }else{
+                System.out.println("Product list is almost full\n");
+                break;
+            }
+
+        }
+    }
+
+
+
+    private void addElectronicProduct() {
+        while (true) {
+            if (WestminsterShoppingManager.consoleProductList.size() < MAX_PRODUCTS) {
+                try {
+                    System.out.println("ADD ELECTRONIC ITEM\n");
+                    System.out.print("Enter Item ID: ");
+                    String productId = input.next();
+                    productId = productId.toUpperCase();
+
+                    if (productId.length() == 4 && Character.isLetter(productId.charAt(0))) {
+                        boolean idExists = false;
+                        for (Product product : WestminsterShoppingManager.consoleProductList) {
+                            if (product.getProductId().equals(productId)) {
+                                idExists = true;
+                                break;
+                            }
+                        }
+
+                        if (idExists) {
+                            System.out.println("Product with the same ID already exists. Please enter a different ID.\n");
+                            continue;
+                        }
+
+                        System.out.print("Enter Item name: ");
+                        String productName = input.next();
+                        System.out.print("Enter number of Items: ");
+                        int noItems = input.nextInt();
+                        System.out.print("Enter price of the item: ");
+                        double price = input.nextDouble();
+                        System.out.print("Enter Brand of the item: ");
+                        String brand = input.next();
+                        System.out.print("Item warranty period (Days): ");     //creating the product instance
+                        int warrantyPeriod = input.nextInt();
+
+                        Electronics newItem = new Electronics(productId, productName, noItems, price, brand, warrantyPeriod);
+                        WestminsterShoppingManager.consoleProductList.add(newItem);   //add it to the product arraylist
+                        System.out.println();
+                        System.out.println("Product details-\n");
+                        displayProductInfo(newItem);
+                        System.out.println("Product added successfully.\n");
+
+
+                    } else {
+                        System.out.println("Invalid ID format. Please try again.\n");
+                    }
+
+                    // Check if the entered ID already exists
+
+                } catch (Exception e) {
+                    System.out.println("Enter a valid input (like numbers)\n");
+                    String junk = input.nextLine();
+                }
+
+                try {
+                    System.out.print("Do you want to add another Electronic Item (Yes/No): ");
+                    String answer = input.next();
+
+                    if (answer.equalsIgnoreCase("No")) {
+                        break;
+                    } else if (answer.equalsIgnoreCase("Yes")) {
+                        continue;
+                    } else {
+                        System.out.println("Entered input is invalid\n");
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input\n");   //
+                    String junk = input.nextLine();
+                }
+            } else {
+                System.out.println("Product list is almost full");          //if product list is 50
+                break;
+            }
+        }
+    }
+
+    private void addClothingProduct(){
+
+        while (true) {
+            if (WestminsterShoppingManager.consoleProductList.size()<MAX_PRODUCTS){
+                try {
+                    System.out.println("ADD CLOTHING ITEM\n");
+                    System.out.print("Enter Item ID: ");
+                    String productId = input.next();
+                    productId = productId.toUpperCase();       //product id's letter is getting as capital letters
+
+                    if (productId.length() == 4 && Character.isLetter(productId.charAt(0))) {    //check the first element is string and length should be 4
+
+                        boolean idExists = false;                                                    //try to find whether the entered id is already exist or not
+
+                        for (Product product : WestminsterShoppingManager.consoleProductList) {
+                            if (product.getProductId().equals(productId)) {
+                                idExists = true;
+                                break;
+                            }
+                        }
+
+                        if (idExists) {
+                            System.out.println("Product with the same ID already exists. Please enter a different ID.\n");
+                            continue;
+                        }
+
+                        System.out.print("Enter Item name: ");
+                        String productName = input.next();
+                        System.out.print("Enter number of Items: ");
+                        int noItems = input.nextInt();
+                        System.out.print("Enter price of the item: ");
+                        double price = input.nextDouble();
+                        System.out.print("Enter color of item: ");
+                        String clothColor = input.next();
+                        System.out.print("Item size of item(UK size): ");
+                        int clothSize = input.nextInt();                             //create cloth instance
+
+                        Clothing newItem = new Clothing(productId, productName, noItems, price, clothColor, clothSize);
+                        WestminsterShoppingManager.consoleProductList.add(newItem);
+
+                        System.out.println();
+                        //System.out.println(WestminsterShoppingManager.consoleProductList);
+                        System.out.println("Product details-\n");
+                        displayProductInfo(newItem);
+                        System.out.println("Product added successfully.\n");
+
+                    } else {
+                        System.out.println("Invalid ID format. Please try again.");
+                    }
+
+
+                } catch (Exception e) {
+                    System.out.println("Enter a valid input(like numbers)\n");
+                    String junk = input.nextLine();
+                }
+
+                System.out.print("Do you want to add another Clothing Item (Yes/No): \n");
+                String answer = input.next();
+                System.out.println();
+
+                if (answer.equalsIgnoreCase("No")) {
+                    break;
+                } else if (answer.equalsIgnoreCase("Yes")) {
+                    continue;
+                } else {
+                    System.out.println("Entered input is invalid\n");
+                    break;
+                }
+            }
+            else {
+                System.out.println("Product is almost full");
+                break;
+            }
+
+        }
+    }
