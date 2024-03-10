@@ -400,3 +400,14 @@ public class WestminsterShoppingManager implements ShoppingManager {
             products.set(i, temp);
         }
     }
+
+    private void loadProductsFromFile() {
+        try {
+            FileInputStream fIn = new FileInputStream("details.txt");
+            ObjectInputStream objIn = new ObjectInputStream(fIn);
+            ArrayList<Product> productDetails = (ArrayList<Product>) objIn.readObject();
+            WestminsterShoppingManager.consoleProductList = productDetails;
+        } catch (Exception e) {
+            System.out.println(" ");
+        }
+    }
