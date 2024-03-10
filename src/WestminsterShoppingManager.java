@@ -383,3 +383,20 @@ public class WestminsterShoppingManager implements ShoppingManager {
             System.out.println("-------------------------");
         }
     }
+
+    public static void selectionSort(ArrayList<Product> products) {
+        int n = products.size();
+
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+
+            for (int j = i + 1; j < n; j++) {          // Compare product IDs for sorting
+                if (products.get(j).getProductId().compareTo(products.get(minIndex).getProductId()) < 0) {
+                    minIndex = j;
+                }
+            }
+            Product temp = products.get(minIndex);      // Swap the found minimum element with the first element
+            products.set(minIndex, products.get(i));
+            products.set(i, temp);
+        }
+    }
