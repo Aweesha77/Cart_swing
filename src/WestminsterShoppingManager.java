@@ -431,3 +431,55 @@ public class WestminsterShoppingManager implements ShoppingManager {
         loginFrame.setLocationRelativeTo(null);                      //center it
 
     }
+
+    public void registerCustomer() {
+        while (true) {
+            try {
+                System.out.print("Enter User name: ");
+                String user_name = input.next();
+
+                boolean userExists = false;
+
+                for (User check_user : WestminsterShoppingManager.userList) {
+                    if (check_user.getUserName().equals(user_name)) {             //check whether previous customer has entered username
+                        userExists = true;
+                        break;                                                        // No need to continue checking, username already exists
+                    }
+                }
+                if (!userExists) {
+                    System.out.print("Enter User Password: ");
+                    String user_password = input.next();
+                    int history = 0;                                           //make history=0 if user didn't place an order yet
+
+                    User new_user = new User(user_name, user_password, history);  //create an instance
+
+                    WestminsterShoppingManager.userList.add(new_user);             //add it to user arraylist
+                    //System.out.println(WestminsterShoppingManager.userList);
+                    System.out.println("User registered successfully.\n");
+
+                } else {
+                    System.out.println("Entered user name already exists");
+                }
+
+                try {
+                    System.out.print("Do you want to register another User (Yes/No): ");
+                    String answer = input.next();
+                    System.out.println();
+
+                    if (answer.equalsIgnoreCase("No")) {
+                        break;
+                    } else if (answer.equalsIgnoreCase("Yes")) {
+                        continue;
+                    } else {
+                        System.out.println("Entered input is invalid\n");
+                        break;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
