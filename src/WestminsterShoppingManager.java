@@ -483,3 +483,14 @@ public class WestminsterShoppingManager implements ShoppingManager {
             }
         }
     }
+
+    private void loadUser() {
+        try {
+            FileInputStream fIn = new FileInputStream("userDetails.txt");         //FileInputStream to read from the file
+            ObjectInputStream objIn = new ObjectInputStream(fIn);                       //ObjectInputStream to read objects from FileInputStream
+            ArrayList<User> userDetails = (ArrayList<User>) objIn.readObject();         // Read an ArrayList of Product objects from ObjectInputStream
+            WestminsterShoppingManager.userList = userDetails;
+        } catch (Exception e) {                                                          // Handle any exceptions that may occur during the file reading process
+            System.out.println(" ");
+        }
+    }
