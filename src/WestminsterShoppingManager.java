@@ -421,3 +421,13 @@ public class WestminsterShoppingManager implements ShoppingManager {
         //System.out.println(WestminsterShoppingManager.consoleProductList);
         //System.out.println("Saved success");
     }
+
+    private void openGUI() {
+        //System.out.println(WestminsterShoppingManager.consoleProductList);
+        LoginGUI loginFrame = new LoginGUI();                        //create loginGUI
+        loginFrame.setTitle("Login");
+        loginFrame.setVisible(true);                                //make it visible
+        loginFrame.setSize(350, 200);
+        loginFrame.setLocationRelativeTo(null);                      //center it
+
+    }
