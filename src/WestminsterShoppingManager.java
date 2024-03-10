@@ -411,3 +411,13 @@ public class WestminsterShoppingManager implements ShoppingManager {
             System.out.println(" ");
         }
     }
+
+    static void saveProductsToFile() throws IOException {
+        File file = new File("details.txt");
+        FileOutputStream fOut = new FileOutputStream(file);
+        ObjectOutputStream objOut = new ObjectOutputStream(fOut);
+
+        objOut.writeObject(WestminsterShoppingManager.consoleProductList);
+        //System.out.println(WestminsterShoppingManager.consoleProductList);
+        //System.out.println("Saved success");
+    }
