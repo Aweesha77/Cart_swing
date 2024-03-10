@@ -278,3 +278,108 @@ public class WestminsterShoppingManager implements ShoppingManager {
 
         }
     }
+
+    public void removeProductFromSystem(){
+        System.out.println("REMOVE ITEM\n");
+
+        while (true) {
+            boolean productFound = false;
+
+            System.out.print("Enter id of the product: ");
+            String deleteProductId = input.next();
+
+            for (Product product : WestminsterShoppingManager.consoleProductList) {   //find the entered id has a product
+                if (product.getProductId().equals(deleteProductId)) {
+                    System.out.println("Product details-\n");
+                    displayProductInfo(product);
+
+                    if (product instanceof Electronics) {
+                        System.out.println("A electronic Item");
+                    } else {
+                        System.out.println("A clothing Item");
+                    }
+
+                    WestminsterShoppingManager.consoleProductList.remove(product);  //remove the product from arraylist
+                    productFound = true;
+//                    System.out.println(WestminsterShoppingManager.consoleProductList);
+                    System.out.println("Product removed successfully.\n");
+                    System.out.println("Total number of products left: " + WestminsterShoppingManager.consoleProductList.size());
+//                    WestminsterShoppingManager.saveProductsToFile();
+                    break; // Exit the loop once the product is found and removed
+                }
+            }
+
+            if (!productFound) {
+                System.out.println("No product under the entered ID");
+            }
+
+            try {
+                System.out.print("Do you want to remove another Item (Yes/No): ");
+                String answer = input.next();
+                if (answer.equalsIgnoreCase("No")) {
+                    break;
+                } else if (answer.equalsIgnoreCase("Yes")) {
+                    continue;
+                } else {
+                    System.out.println("Entered input is invalid\n");
+                }
+            } catch (Exception e) {
+                System.out.println("Enter a valid input (like numbers)\n");
+                String junk = input.nextLine();
+            }
+
+            if (WestminsterShoppingManager.consoleProductList.isEmpty()) {
+                System.out.println("Product list is empty.\n");
+                break;
+            }
+        }
+    }
+
+
+    public void displayProductInfo(Product product) {
+        System.out.println("Product ID: " + product.getProductId());      //using get methods access the product
+        System.out.println("Product Name: " + product.getProductName());
+        System.out.println("Available Items: " + product.getNoItems());
+        System.out.println("Price: " + product.getPrice());
+        // Display additional attributes based on the type of product
+
+        if (product instanceof Electronics) {
+            Electronics electronics = (Electronics) product;             //cast product to electronics
+            System.out.println("Brand: " + electronics.getBrand());
+            System.out.println("Warranty Period: " + electronics.getWarrantyPeriod() + " months");
+        } else if (product instanceof Clothing) {
+            Clothing clothing = (Clothing) product;
+            System.out.println("Size: " + clothing.getClothSize());
+            System.out.println("Color: " + clothing.getClothColor());
+        }
+    }
+
+    private void printProductList(ArrayList<Product> consoleProductList) {
+
+        System.out.println("List of Products in the System:");
+        if (WestminsterShoppingManager.consoleProductList.isEmpty()) {
+            System.out.println("No products in the system.");
+        } else {
+            ArrayList<Product> sortedProducts = new ArrayList<>(WestminsterShoppingManager.consoleProductList);      //create an arraylist and assign product list to it
+            selectionSort(sortedProducts);        //access the method call selectionSort
+
+            for (Product product : sortedProducts) {                //created arraylist use for sorting
+                System.out.println("-------------------------");
+                System.out.println("Product ID: " + product.getProductId());
+                System.out.println("Product Name: " + product.getProductName());
+                System.out.println("Number of Items: " + product.getNoItems());
+                System.out.println("Price: " + product.getPrice());
+
+                if (product instanceof Electronics) {
+                    System.out.println("Brand: " + ((Electronics) product).getBrand());
+                    System.out.println("Warranty Period: " + ((Electronics) product).getWarrantyPeriod() + " months");
+                    System.out.println("Product Type: Electronics");
+                } else if (product instanceof Clothing) {
+                    System.out.println("Color: " + ((Clothing) product).getClothColor());
+                    System.out.println("Size: " + ((Clothing) product).getClothSize());
+                    System.out.println("Product Type: Clothing");
+                }
+            }
+            System.out.println("-------------------------");
+        }
+    }
